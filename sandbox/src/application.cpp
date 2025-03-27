@@ -1,6 +1,9 @@
+#include <GLSS/window.hpp>
 #include <fmt/core.h>
 
-int main() {
-  fmt::println("Hello");
-  return 0;
+int main()
+{
+    glss::Window window {};
+    window.init(100, 100, "title");
+    return 0;
 }

@@ -1,7 +1,7 @@
 Detecting compiler hash for triplet x64-linux...
 Compiler found: /usr/bin/clang++
 All requested packages are currently installed.
-Total install time: 64.1 us
+Total install time: 101 us
 The package fmt provides CMake targets:
 
     find_package(fmt CONFIG REQUIRED)
