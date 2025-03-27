@@ -1,0 +1,18 @@
+Detecting compiler hash for triplet x64-linux...
+Compiler found: /usr/bin/clang++
+All requested packages are currently installed.
+Total install time: 64.1 us
+The package fmt provides CMake targets:
+
+    find_package(fmt CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE fmt::fmt)
+
+    # Or use the header-only version
+    find_package(fmt CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE fmt::fmt-header-only)
+
+Vulkan-Headers provides official find_package support:
+
+    find_package(VulkanHeaders CONFIG)
+    target_link_libraries(main PRIVATE Vulkan::Headers)
+

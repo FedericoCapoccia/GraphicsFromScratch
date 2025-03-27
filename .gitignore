@@ -1,0 +1,7 @@
+bin/
+build/
+out/
+vcpkg_installed/
+
+.vs/
+.idea/
