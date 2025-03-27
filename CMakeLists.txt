@@ -10,6 +10,10 @@ function(set_clang_compiler)
     endif()
 endfunction()
 
+if(WIN32 AND MSVC)
+    set(VCPKG_TARGET_TRIPLET x64-windows-static)
+endif()
+
 project(GraphicsFromScratch)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -25,6 +29,8 @@ if (WIN32)
     if(MSVC)
         add_compile_options(/arch:AVX2 /W4 /EHsc) # SIMD optimizations
         add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+        set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+        set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
     endif()
 
 elseif(UNIX AND NOT APPLE)

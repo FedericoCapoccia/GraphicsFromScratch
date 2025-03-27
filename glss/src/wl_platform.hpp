@@ -6,11 +6,19 @@
 
 namespace glss {
 
-struct Window::WindowPlatformData {
-    bool init();
-    ~WindowPlatformData();
+struct WindowPlatformData {
+    uint32_t width;
+    uint32_t height;
 
-    wl_display* display {};
+    struct wl_display* display {};
+    struct wl_registry* registry {};
+    struct wl_compositor* compositor {};
+    struct wl_surface* surface = {};
+    struct wl_buffer* buffer {};
+    struct wl_shm* shm {};
+    uint8_t* pixl {};
+
+    ~WindowPlatformData();
 };
 
 } // namespace glss
