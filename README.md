@@ -1,8 +1,9 @@
 # GraphicsFromScratch
 
-GraphicsFromScratch (GFS) is a personal project aimed at deepening my understanding of various fundamental concepts in graphics programming and low-level system development. The primary goal is to build everything from scratch while learning key topics along the way.
-<br>
-Through this project, I aim to explore and implement
+GraphicsFromScratch (GFS) is a personal project aimed at deepening my understanding of various fundamental concepts in graphics programming and low-level system development.<br>
+The primary goal is to build everything from scratch while learning key topics along the way.<br>
+<br><br>
+Through this project, I aim to explore and implement:
  - __Common data strucutres__ - Implementing dynamic arrays, lists, hash maps, trees, and other essential structures.
  - __Platform-Specific Windowing APIs__ – Understanding and working with Win32 and Wayland (still considering X11) while still provifing GLFW and SDL3 implementations.
  - __Efficient Logging__ – Designing a robust logging system suitable for large-scale projects.
