@@ -1,5 +1,3 @@
-#define VOLK_IMPLEMENTATION
-
 #include <GLFW/glfw3.h>
 #include <stdio.h>
 #include <volk.h>
@@ -7,7 +5,7 @@
 
 void glfw_error_callback(int code, const char* description)
 {
-    printf("GLFW error: [%s]\n", description);
+    printf("GLFW error[%d]: [%s]\n", code, description);
 }
 
 int main()
@@ -23,6 +21,7 @@ int main()
     }
 
     glfwSetErrorCallback(glfw_error_callback);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
     GLFWwindow* window
         = glfwCreateWindow(800, 600, "Engine", nullptr, nullptr);
@@ -55,9 +54,9 @@ int main()
         printf("Failed to create VkInstance: {%s}\n", string_VkResult(res));
     }
 
-    // while (!glfwWindowShouldClose(window)) {
-    //     glfwPollEvents();
-    // }
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+    }
 
     return 0;
 }
