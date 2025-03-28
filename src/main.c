@@ -5,6 +5,11 @@
 #include <volk.h>
 #include <vulkan/vk_enum_string_helper.h>
 
+void glfw_error_callback(int code, const char* description)
+{
+    printf("GLFW error: [%s]\n", description);
+}
+
 int main()
 {
     if (volkInitialize() != VK_SUCCESS) {
@@ -17,7 +22,10 @@ int main()
         return -2;
     }
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Engine", nullptr, nullptr);
+    glfwSetErrorCallback(glfw_error_callback);
+
+    GLFWwindow* window
+        = glfwCreateWindow(800, 600, "Engine", nullptr, nullptr);
     if (window == nullptr) {
         printf("Failed to create GLFW window\n");
         return -3;
