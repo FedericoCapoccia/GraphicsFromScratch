@@ -17,7 +17,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 set(EXE_NAME "engine")
 add_executable(${EXE_NAME})
 
-set(SOURCES "${PROJECT_SOURCE_DIR}/src/main.c")
+set(SOURCES
+    "${PROJECT_SOURCE_DIR}/src/main.c"
+    "${PROJECT_SOURCE_DIR}/src/renderer/renderer.c"
+)
 
 # =====================================================================================================================
 # Platform specific

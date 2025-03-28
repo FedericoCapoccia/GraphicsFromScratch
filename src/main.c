@@ -1,7 +1,9 @@
-#include <GLFW/glfw3.h>
+#include "renderer/renderer.h"
 #include <stdio.h>
-#include <volk.h>
-#include <vulkan/vk_enum_string_helper.h>
+
+// TODO: maybe create custom allocator for the Engine
+// TODO: Create logger
+// TODO: Dynamic array
 
 void glfw_error_callback(int code, const char* description)
 {
@@ -23,40 +25,19 @@ int main(void)
     glfwSetErrorCallback(glfw_error_callback);
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
-    GLFWwindow* window
-        = glfwCreateWindow(800, 600, "Engine", 0, 0);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Engine", 0, 0);
+
     if (window == 0) {
         printf("Failed to create GLFW window\n");
         return -3;
     }
 
-    VkApplicationInfo app_info = {
-        .sType = VK_STRUCTURE_TYPE_APPLICATION_INFO,
-        .pApplicationName = "Engine",
-        .applicationVersion = VK_MAKE_VERSION(1, 0, 0),
-        .pEngineName = "GraphicsFromScratch",
-        .engineVersion = VK_MAKE_VERSION(1, 0, 0),
-        .apiVersion = VK_API_VERSION_1_4
-    };
+    renderer_t renderer;
+    renderer_initialize(&renderer, window, true);
 
-    const char* layers[] = { "VK_LAYER_KHRONOS_validation" };
-
-    VkInstanceCreateInfo create_info = {
-        .sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
-        .pApplicationInfo = &app_info,
-        .enabledLayerCount = 1,
-        .ppEnabledLayerNames = layers
-    };
-
-    VkInstance instance;
-    VkResult res = vkCreateInstance(&create_info, 0, &instance);
-    if (res != VK_SUCCESS) {
-        printf("Failed to create VkInstance: {%s}\n", string_VkResult(res));
-    }
-
-    while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
-    }
+    // while (!glfwWindowShouldClose(window)) {
+    //     glfwPollEvents();
+    // }
 
     return 0;
 }
