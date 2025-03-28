@@ -17,7 +17,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 set(EXE_NAME "engine")
 add_executable(${EXE_NAME})
 
-set(SOURCES "${CMAKE_SOURCE_DIR}/src/main.c")
+set(SOURCES "${PROJECT_SOURCE_DIR}/src/main.c")
 
 # =====================================================================================================================
 # Platform specific
@@ -57,7 +57,7 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
 find_package(VulkanHeaders CONFIG REQUIRED)
-find_package(Vulkan CONFIG REQUIRED)
+find_package(VulkanUtilityLibraries CONFIG REQUIRED)
 find_package(volk CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 
@@ -66,6 +66,13 @@ target_compile_definitions(${EXE_NAME} PRIVATE
     "GLFW_INCLUDE_VULKAN"
     "VK_NO_PROTOTYPES"
 )
-target_link_libraries(${EXE_NAME} PRIVATE Vulkan::Headers volk::volk volk::volk_headers glfw)
+target_link_libraries(${EXE_NAME} PRIVATE
+    Vulkan::Headers
+    Vulkan::UtilityHeaders
+    volk::volk
+    volk::volk_headers
+    glfw
+)
 
+  # target_link_libraries(main PRIVATE Vulkan::SafeStruct Vulkan::LayerSettings  Vulkan::CompilerConfiguration)
 

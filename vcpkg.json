@@ -3,6 +3,7 @@
     "glfw3",
     "volk",
     "vulkan-headers",
-    "vulkan-loader"
+    "vulkan-loader",
+    "vulkan-utility-libraries"
   ]
 }
