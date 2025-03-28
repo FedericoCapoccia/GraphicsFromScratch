@@ -1,3 +1,8 @@
 {
-  "dependencies": ["glfw3", "vulkan-headers"]
+  "dependencies": [
+    "glfw3",
+    "volk",
+    "vulkan-headers",
+    "vulkan-loader"
+  ]
 }

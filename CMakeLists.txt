@@ -55,11 +55,17 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-target_compile_definitions(${EXE_NAME} PRIVATE GLFW_INCLUDE_NONE=1)
 
-find_package(VulkanHeaders CONFIG)
+find_package(VulkanHeaders CONFIG REQUIRED)
+find_package(Vulkan CONFIG REQUIRED)
+find_package(volk CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 
-target_link_libraries(${EXE_NAME} PRIVATE Vulkan::Headers glfw)
+target_compile_definitions(${EXE_NAME} PRIVATE
+    "GLFW_INCLUDE_NONE=1"
+    "GLFW_INCLUDE_VULKAN"
+    "VK_NO_PROTOTYPES"
+)
+target_link_libraries(${EXE_NAME} PRIVATE Vulkan::Headers volk::volk volk::volk_headers glfw)
 
 
