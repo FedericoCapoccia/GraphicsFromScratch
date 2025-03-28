@@ -8,7 +8,7 @@ void glfw_error_callback(int code, const char* description)
     printf("GLFW error[%d]: [%s]\n", code, description);
 }
 
-int main()
+int main(void)
 {
     if (volkInitialize() != VK_SUCCESS) {
         printf("Failed to initialize volk\n");
