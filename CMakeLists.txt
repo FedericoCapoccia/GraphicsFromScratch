@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 
-if(WIN32 AND MSVC)
+if(WIN32)
     set(VCPKG_TARGET_TRIPLET x64-windows-static)
 endif()
 
@@ -10,7 +10,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 project(GraphicsFromScratch LANGUAGES C)
-set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 

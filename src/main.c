@@ -24,8 +24,8 @@ int main()
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
     GLFWwindow* window
-        = glfwCreateWindow(800, 600, "Engine", nullptr, nullptr);
-    if (window == nullptr) {
+        = glfwCreateWindow(800, 600, "Engine", 0, 0);
+    if (window == 0) {
         printf("Failed to create GLFW window\n");
         return -3;
     }
@@ -49,7 +49,7 @@ int main()
     };
 
     VkInstance instance;
-    VkResult res = vkCreateInstance(&create_info, nullptr, &instance);
+    VkResult res = vkCreateInstance(&create_info, 0, &instance);
     if (res != VK_SUCCESS) {
         printf("Failed to create VkInstance: {%s}\n", string_VkResult(res));
     }
