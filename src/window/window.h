@@ -1,7 +1,6 @@
 #pragma once
 
-#include <stdbool.h>
-#include <stdint.h>
+#include "defines.h"
 
 struct platform_data_t;
 
@@ -9,10 +8,10 @@ typedef struct window {
     struct platform_data_t* data;
 } window_t;
 
-bool window_initialize(window_t* window, uint32_t width, uint32_t height, const char* title);
+b32 window_initialize(window_t* window, u32 width, u32 height, const char* title);
 void window_shutdown(window_t* window);
 
 void window_poll_events(void);
-bool window_should_close(window_t* window);
+b32 window_should_close(window_t* window);
 
 // varius methods that interact with the data in a platform specific way

@@ -1,9 +1,9 @@
 #include "renderer.h"
-#include "../window/window.h"
+#include "window/window.h"
 
 #include <stdio.h>
 
-bool renderer_initialize(renderer_t* renderer, window_t* window, bool validation)
+b32 renderer_initialize(renderer_t* renderer, window_t* window, b32 validation)
 {
     VkApplicationInfo app_info = {
         .sType = VK_STRUCTURE_TYPE_APPLICATION_INFO,
@@ -35,7 +35,7 @@ bool renderer_initialize(renderer_t* renderer, window_t* window, bool validation
         }
     }
 
-    return true;
+    return TRUE;
 }
 
 void renderer_shutdown(renderer_t* renderer)

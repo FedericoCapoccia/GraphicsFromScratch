@@ -13,11 +13,11 @@ void glfw_error_callback(int code, const char* description)
     printf("GLFW error[%d]: [%s]\n", code, description);
 }
 
-bool window_initialize(window_t* window, uint32_t width, uint32_t height, const char* title)
+b32 window_initialize(window_t* window, u32 width, u32 height, const char* title)
 {
     if (glfwInit() == 0) {
         printf("Failed to initialize GLFW\n");
-        return false;
+        return FALSE;
     }
 
     glfwSetErrorCallback(glfw_error_callback);
@@ -26,18 +26,18 @@ bool window_initialize(window_t* window, uint32_t width, uint32_t height, const 
     platform_data_t* data = malloc(sizeof(platform_data_t));
     if (data == 0) {
         printf("Failed to allocate platform data struct\n");
-        return false;
+        return FALSE;
     }
 
     data->handle = glfwCreateWindow(width, height, title, 0, 0);
 
     if (data->handle == 0) {
         printf("Failed to create GLFW window\n");
-        return false;
+        return FALSE;
     }
 
     window->data = data;
-    return true;
+    return TRUE;
 }
 
 void window_shutdown(window_t* window)
@@ -52,7 +52,7 @@ void window_poll_events(void)
     glfwPollEvents();
 }
 
-bool window_should_close(window_t* window)
+b32 window_should_close(window_t* window)
 {
     return glfwWindowShouldClose(window->data->handle);
 }

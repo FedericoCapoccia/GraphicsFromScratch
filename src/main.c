@@ -1,5 +1,6 @@
 #include "renderer/renderer.h"
 
+#include "defines.h"
 #include <stdio.h>
 
 // TODO: maybe create custom allocator for the Engine
@@ -20,7 +21,7 @@ int main(void)
     }
 
     renderer_t renderer = { 0 };
-    if (!renderer_initialize(&renderer, &window, true)) {
+    if (!renderer_initialize(&renderer, &window, TRUE)) {
         printf("Failed to initialize renderer\n");
         return -3;
     }
