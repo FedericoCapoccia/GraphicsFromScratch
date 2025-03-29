@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-b32 renderer_initialize(renderer_t* renderer, window_t* window, b32 validation)
+b8 renderer_initialize(renderer_t* renderer, window_t* window, b8 validation)
 {
     VkApplicationInfo app_info = {
         .sType = VK_STRUCTURE_TYPE_APPLICATION_INFO,

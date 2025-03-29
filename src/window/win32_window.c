@@ -7,7 +7,7 @@ typedef struct platform_data_t {
     void* handle; // TODO: change to specific things
 } platform_data_t;
 
-b32 window_initialize(window_t* window, u32 width, u32 height, const char* title)
+b8 window_initialize(window_t* window, u32 width, u32 height, const char* title)
 {
 
     platform_data_t* data = malloc(sizeof(platform_data_t));
@@ -30,7 +30,7 @@ void window_poll_events(void)
     // TODO:
 }
 
-b32 window_should_close(window_t* window)
+b8 window_should_close(window_t* window)
 {
     // TODO:
     return TRUE;

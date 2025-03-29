@@ -20,6 +20,7 @@ add_executable(${EXE_NAME})
 set(SOURCES
     "${PROJECT_SOURCE_DIR}/src/main.c"
     "${PROJECT_SOURCE_DIR}/src/renderer/renderer.c"
+    "${PROJECT_SOURCE_DIR}/src/core/logger.c"
 )
 
 # =====================================================================================================================
@@ -31,7 +32,11 @@ if (WINDOW_BACKEND STREQUAL "GLFW")
     message(STATUS "Using GLFW as backend")
 
     find_package(glfw3 CONFIG REQUIRED)
-    target_compile_definitions(${EXE_NAME} PRIVATE GLFW_INCLUDE_NONE=1)
+    target_compile_definitions(${EXE_NAME} PRIVATE
+        "GLFW_INCLUDE_NONE=1"
+        "GLFW_INCLUDE_NONE=1"
+        "GLFW_INCLUDE_VULKAN"
+    )
 
     target_link_libraries(${EXE_NAME} PRIVATE glfw)
     list(APPEND SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/window/glfw_window.c")
@@ -85,9 +90,9 @@ find_package(VulkanUtilityLibraries CONFIG REQUIRED)
 find_package(volk CONFIG REQUIRED)
 
 target_compile_definitions(${EXE_NAME} PRIVATE
-    "GLFW_INCLUDE_NONE=1"
-    "GLFW_INCLUDE_VULKAN"
     "VK_NO_PROTOTYPES"
+    "$<$<CONFIG:Debug>:_DEBUG>"
+    "$<$<CONFIG:Release>:HRELEASE>"
 )
 target_link_libraries(${EXE_NAME} PRIVATE
     Vulkan::Headers

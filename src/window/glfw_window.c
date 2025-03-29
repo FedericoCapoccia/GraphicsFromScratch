@@ -13,7 +13,7 @@ void glfw_error_callback(int code, const char* description)
     printf("GLFW error[%d]: [%s]\n", code, description);
 }
 
-b32 window_initialize(window_t* window, u32 width, u32 height, const char* title)
+b8 window_initialize(window_t* window, u32 width, u32 height, const char* title)
 {
     if (glfwInit() == 0) {
         printf("Failed to initialize GLFW\n");
@@ -52,7 +52,7 @@ void window_poll_events(void)
     glfwPollEvents();
 }
 
-b32 window_should_close(window_t* window)
+b8 window_should_close(window_t* window)
 {
     return glfwWindowShouldClose(window->data->handle);
 }

@@ -11,5 +11,5 @@ typedef struct renderer {
     VkInstance instance;
 } renderer_t;
 
-b32 renderer_initialize(renderer_t* renderer, window_t* window, b32 validation);
+b8 renderer_initialize(renderer_t* renderer, window_t* window, b8 validation);
 void renderer_shutdown(renderer_t* renderer);
