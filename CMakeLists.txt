@@ -26,6 +26,18 @@ set(SOURCES
 # Platform specific
 # =====================================================================================================================
 
+# Windowing
+if (WINDOW_BACKEND STREQUAL "GLFW")
+    message(STATUS "Using GLFW as backend")
+
+    find_package(glfw3 CONFIG REQUIRED)
+    target_compile_definitions(${EXE_NAME} PRIVATE GLFW_INCLUDE_NONE=1)
+
+    target_link_libraries(${EXE_NAME} PRIVATE glfw)
+    list(APPEND SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/window/glfw_window.c")
+endif()
+
+# General
 if (WIN32)
     target_compile_definitions(${EXE_NAME} PRIVATE _WIN32)
 
@@ -36,12 +48,20 @@ if (WIN32)
         set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
     endif()
 
+    if (WINDOW_BACKEND STREQUAL "NATIVE")
+        list(APPEND SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/window/win32_window.c")
+    endif()
+
     # Windows specific implementations
     list(APPEND SOURCES "")
 
 elseif(UNIX AND NOT APPLE)
     target_compile_definitions(${EXE_NAME} PRIVATE __linux__)
     target_compile_options(${EXE_NAME} PRIVATE -Wall -Wextra -Wpedantic)
+
+    if (WINDOW_BACKEND STREQUAL "NATIVE")
+        list(APPEND SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/window/wl_window.c")
+    endif()
 
     # Linux specific implementations
     list(APPEND SOURCES "")
@@ -62,7 +82,6 @@ set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 find_package(VulkanHeaders CONFIG REQUIRED)
 find_package(VulkanUtilityLibraries CONFIG REQUIRED)
 find_package(volk CONFIG REQUIRED)
-find_package(glfw3 CONFIG REQUIRED)
 
 target_compile_definitions(${EXE_NAME} PRIVATE
     "GLFW_INCLUDE_NONE=1"
@@ -74,7 +93,6 @@ target_link_libraries(${EXE_NAME} PRIVATE
     Vulkan::UtilityHeaders
     volk::volk
     volk::volk_headers
-    glfw
 )
 
   # target_link_libraries(main PRIVATE Vulkan::SafeStruct Vulkan::LayerSettings  Vulkan::CompilerConfiguration)

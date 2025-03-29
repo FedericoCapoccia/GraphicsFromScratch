@@ -1,7 +1,9 @@
 #include "renderer.h"
+#include "../window/window.h"
+
 #include <stdio.h>
 
-bool renderer_initialize(renderer_t* renderer, GLFWwindow* window, bool validation)
+bool renderer_initialize(renderer_t* renderer, window_t* window, bool validation)
 {
     VkApplicationInfo app_info = {
         .sType = VK_STRUCTURE_TYPE_APPLICATION_INFO,
@@ -14,16 +16,16 @@ bool renderer_initialize(renderer_t* renderer, GLFWwindow* window, bool validati
 
     const char* layers[] = { "VK_LAYER_KHRONOS_validation" };
 
-    uint32_t glfw_extension_count = 0;
-    const char** glfw_extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count); // do not free because it is managed by glfw directly
+    // uint32_t glfw_extension_count = 0;
+    // const char** glfw_extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count); // do not free because it is managed by glfw directly
 
     VkInstanceCreateInfo create_info = {
         .sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
         .pApplicationInfo = &app_info,
         .enabledLayerCount = 1,
         .ppEnabledLayerNames = layers,
-        .enabledExtensionCount = glfw_extension_count,
-        .ppEnabledExtensionNames = glfw_extensions
+        // .enabledExtensionCount = glfw_extension_count,
+        // .ppEnabledExtensionNames = glfw_extensions
     };
 
     {
@@ -34,4 +36,9 @@ bool renderer_initialize(renderer_t* renderer, GLFWwindow* window, bool validati
     }
 
     return true;
+}
+
+void renderer_shutdown(renderer_t* renderer)
+{
+    vkDestroyInstance(renderer->instance, 0);
 }
